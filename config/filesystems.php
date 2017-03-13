@@ -50,9 +50,22 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path('app/public/'),
             'visibility' => 'public',
         ],
+
+        'sheets' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/sheets/'),
+            'visibility' => 'public',
+        ],
+
+        'images' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/images/'),
+            'visibility' => 'public',
+        ],
+
 
         's3' => [
             'driver' => 's3',
