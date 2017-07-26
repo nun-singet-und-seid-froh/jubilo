@@ -8,6 +8,7 @@
     
 <ul>
     <li><a href="/piece/publish">Neues Stück eintragen</a></li>
+    <li><a href="/admin/users">Userverwaltung</a></li>
     <li><a href="/logout">Ausloggen</a></li>
 </ul>
 @endsection

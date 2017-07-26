@@ -40,7 +40,7 @@ class Piece extends Model
 
   // 1-to-n
     public function midifiles(){
-      return $this->hasMany('App\Models\Midifile');
+      return $this->hasMany('App\Models\Midizip');
     }    
 
     public function recordings(){
@@ -142,7 +142,13 @@ class Piece extends Model
         if ( ($filter['opus_id'] <> '') and $this->opus['id'] <> $filter['opus_id']) {
             return FALSE;
         }
-               
-       return TRUE; 
+        
+        // pretext
+        // a text is always pretext of its own, hence the third condition
+        if ( ($filter['pretext_id'] <> '') and ($this->text->pretext['id'] <> $filter['pretext_id']) and ($this->text['id'] <> $filter['pretext_id']) ){
+            return FALSE;
+        }
+        
+        return TRUE; 
     }
 }

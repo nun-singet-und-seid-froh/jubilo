@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Source;
 
 class SourcesTableSeeder extends Seeder
 {
@@ -11,16 +12,32 @@ class SourcesTableSeeder extends Seeder
      */
     public function run()
     {
-        $speyer = new App\Models\Source;
-          $speyer->title = 'Das Speyerer Gesangbuch von 1599';
-          $speyer->year = 1599;
-          $speyer->publisherAddress = 'Speyer';
-        $speyer->save();
-        
-        $ros_cantus = App\Models\Cantus::where('title','Es ist ein Ros entsprungen')->first();
         $ros_piece = App\Models\Piece::where('title','Es ist ein Ros entsprungen')->first();
         
-        $ros_cantus->sources()->attach($speyer);
-        $ros_piece->sources()->attach($speyer);
+        $wgag = new Source;
+           $wgag['title'] = 'Die Weihnachtsgeschichte';
+           $wgag['editors'] = 'Hugo Distler';
+           $wgag['publisher'] = 'Bärenreiter';
+           $wgag['publisherAddress'] = 'Kassel';
+           $wgag['year'] = 1933;
+           $wgag['comment'] = 'Erstausgabe';
+           $wgag['license'] = 'gemeinfrei';
+           $wgag['url'] = "http://www.jonathan-scholbach.de";
+           $wgag['isPubliclyAvailable'] = TRUE;           
+        $wgag->save();
+        $ros_piece->sources()->attach($wgag);
+        
+        $wg = new Source;
+           $wg['title'] = 'Die Weihnachtsgeschichte';
+           $wg['editors'] = 'Hugo Distler';
+           $wg['publisher'] = 'Bayrische Staatsbibliothek';
+           $wg['publisherAddress'] = '';
+           $wg['comment'] = 'Autograph';
+           $wg['license'] = 'gemeinfrei';
+           $wg['url'] = "http://daten.digitale-sammlungen.de/~db/0006/bsb00068297/images/";
+           $wg['isPubliclyAvailable'] = TRUE;           
+        $wg->save();
+                          
+        $ros_piece->sources()->attach($wg);
     }
 }

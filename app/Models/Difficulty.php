@@ -23,8 +23,7 @@ class Difficulty extends Model
     // ...
             
   // n-to-n    
-   
-    public function pieces() {
-        $this->hasMany('App\Models\Piece');
-    }
+    public function pieces(){
+        return $this->hasMany('App\Models\Piece');
+    }   
 }

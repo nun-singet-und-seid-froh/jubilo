@@ -4,7 +4,11 @@
     @if (Auth::check()) 
     <div class="row">
         <div class="login-information">
-            Angemeldet als <b>{{ Auth::user()->name }}</b>
+            Angemeldet als <b>{{ Auth::user()->name }}</b> 
+            @if (Auth::user()->roles()->first())
+                ({{ Auth::user()->roles()->first()->slug }})
+            @endif
+            
             <span class="pull-right"><a href="/logout" class="hint-link">Ausloggen</a></span>
         </div>    
     </div>        

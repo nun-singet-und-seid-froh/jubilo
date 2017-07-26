@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class MidifilesTableSeeder extends Seeder
+class MidizipsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class MidifilesTableSeeder extends Seeder
      */
     public function run()
     {
-        $ros_sopran = new App\Models\Midifile;
+        $ros_sopran = new App\Models\Midizip;
             $ros_sopran['title'] = 'Es_ist_ein_Ros_entsprungen_(Distler,_Hugo)-Sopran';
         $ros_sopran->save();    
     }

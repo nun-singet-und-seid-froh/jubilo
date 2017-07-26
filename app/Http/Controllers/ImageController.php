@@ -5,17 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Image;
+use Illuminate\Support\Facades\Log;
 
 class ImageController extends Controller
 {    
-    public function prepare(Request $request) {
+    public function uploadRaw(Request $request) {
         $fileName = str_random(40);
-        $request->file('composer-image-raw')->storeAs('public/temp', $fileName);
+        Log::info('fileName:' . $fileName);
+        $request->file('raw-image')->storeAs('public/temp', $fileName);
         $response = [
             'path' => $fileName,
         ];
-        return $response;
+        return $response;        
     }
+    
+    
 /*    
     public function store(Request $request) {
       $rules = [

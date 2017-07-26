@@ -21,6 +21,7 @@ class PiecesTableSeeder extends Seeder
         $ros['title'] = "Es ist ein Ros entsprungen";
         $ros['editionNumber'] = 1;
         $ros['sourcecode'] = "https://github.com/nun-singet-und-seid-froh/nun-singet-und-seid-froh/tree/scores/es_ist_ein_ros_entsprungen/distler%2C_hugo/scores/Es_ist_ein_Ros_entsprungen/Es_ist_ein_Ros_entsprungen_(Distler%2C_Hugo)";
+        $ros['year'] = 1933;
       $ros->save();
       $ros->composers()->attach($distler);
       

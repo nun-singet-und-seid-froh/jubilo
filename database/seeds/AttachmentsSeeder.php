@@ -58,9 +58,7 @@ class AttachmentsSeeder extends Seeder
           
           // load texts
           $heiland_text = App\Models\Text::where('title','O Heiland, reiß die Himmel auf')->first();
-
           $himmel_text = App\Models\Text::where('title','Vom Himmel hoch')->first();
-
           $in_dulci_text = App\Models\Text::where('title','In dulci jubilo')->first();
           $ros_text = App\Models\Text::where('title','Es ist ein Ros entsprungen')->first();
           $schiff_text = App\Models\Text::where('title','Es kommt ein Schiff, geladen')->first();   
@@ -73,7 +71,6 @@ class AttachmentsSeeder extends Seeder
           $sschwer = App\Models\Difficulty::where('name','sehr schwer')->first();
     
           // run attachments and associations
-
           $in_dulci_piece->text()->associate($in_dulci_text);
           $in_dulci_piece->difficulty()->associate($leicht);
           $in_dulci_piece->instrumentation()->associate($satb);

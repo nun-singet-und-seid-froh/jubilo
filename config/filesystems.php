@@ -60,6 +60,12 @@ return [
             'visibility' => 'public',
         ],
 
+        'sources' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/sources/'),
+            'visibility' => 'public',
+        ],
+        
         'images' => [
             'driver' => 'local',
             'root' => storage_path('app/public/images/'),

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\Piece;
 use App\Models\Person;
@@ -26,9 +27,9 @@ class CatalogueController extends Controller
 
         // fetch all persons that are composers of a published piece
 
-        $data['composers'] = Person::has('pieces')->get();
+        $data['composers'] = Person::has('pieces')->orderBy('lastName')->get();
         
-        $data['lyricists'] = Person::has('texts')->get();
+        $data['lyricists'] = Person::has('texts')->orderBy('lastName')->get();
 
         // fetch all Epoques with at least one published piece
 
@@ -60,14 +61,14 @@ class CatalogueController extends Controller
             }
         }
 
-        $data['difficulties'] = Difficulty::all();
+        $data['difficulties'] = Difficulty::has('pieces')->get();
         $data['languages'] = Language::orderBy('name')->get();
         
         $data['cantusses'] = Cantus::all();
-        $data['texts'] = Text::all();    
-        $data['roots'] = Text::where('preText_id', 0)->get();
+        $data['texts'] = Text::all();
+        $data['pretexts'] = Text::where('pretext_id', 0)->orderBy('title')->get();
         
-        return view('catalogue', ['data'=>$data]);
+        return view('catalogue.show', ['data'=>$data]);
     }
     
     /*
@@ -87,7 +88,7 @@ class CatalogueController extends Controller
 
                'lyricist_id' => $request->lyricist_id,
                'text_id' => $request->text_id,
-               'root_id' => $request->root_id,
+               'pretext_id' => $request->pretext_id,
                'language_id' => $request->language_id,
 
                'difficulty_id' => $request->difficulty_id,
@@ -95,10 +96,11 @@ class CatalogueController extends Controller
                'ensemble_id' => $request->ensemble_id,
                'instrumentation_id' => $request->instrumentation_id,
 
-               'cantus_id' => $request->cantus_id,
+               'cantus_id' => $request->cantus_id,  
            ]);
         });
  
+        // prepare the data for the view
         foreach ($filtered_pieces as $piece) {
             $piece->composer = $piece->composers->first()->fullNameString('firstNameFirst');
             $piece->ensemble =  $piece->instrumentation->ensemble['name'];
@@ -112,6 +114,7 @@ class CatalogueController extends Controller
             $piece->language = implode(', ', $language_array);
             $piece->link = 'piece/show/' . $piece['id'];
         }
+        
         // get a unique list of titles, composers, etc. which are related to the filtered pieces
         $filtered_titles = $filtered_pieces->unique('title')->pluck('title');
         $filtered_composer_ids = [];
@@ -133,11 +136,11 @@ class CatalogueController extends Controller
             $ensemble['name'] = $ensemble['name'];
         }
         
-        $filtered_numbersOfVoices = collect([]);
+        $filtered_numberOfVoices = collect([]);
         foreach ($filtered_instrumentations as $instrumentation) {
-            $filtered_numbersOfVoices->push($instrumentation['numberOfVoices']);
+            $filtered_numberOfVoices->push($instrumentation['numberOfVoices']);
         }
-        $filtered_numbersOfVoices = $filtered_numbersOfVoices->unique();
+        $filtered_numberOfVoices = $filtered_numberOfVoices->unique();
 
         $filtered_cantusses = collect([]);
         foreach ($filtered_pieces as $piece) {
@@ -149,43 +152,59 @@ class CatalogueController extends Controller
         
         $filtered_texts = Text::findMany($filtered_pieces->unique('text_id')->pluck('text_id'));
         
+        Log::info('filtered texts: ' . $filtered_texts);
+        
         $filtered_languages = collect([]);
-        $filtered_roots = collect([]);        
+        $filtered_pretexts = collect([]);
+        Log::info('filter@CatalogueController: $filtered_texts: ' . $filtered_texts);
+        
         foreach ($filtered_texts as $text){
-            $filtered_roots->push($text->root());
+             if ($text['pretext_id'] <> 0) {
+                $filtered_pretexts->push($text->pretext());
+                Log::info('added pretext' . $text->pretext['title']);                
+            }
+            else {
+                $filtered_pretexts->push($text);
+                Log::info($text['title'] . ' has no pretext, has been added as root.');
+            }
+            
             foreach ($text->languages()->get() as $language){
                 $filtered_languages->push($language);
             }
         }
         $filtered_languages = $filtered_languages->unique('name');
-        $filtered_roots = $filtered_roots->unique();
-
+        // $filtered_pretexts = $filtered_pretexts->unique();
+        
+        Log::info('filtered pretexts: ' . $filtered_pretexts);
+        Log::info('filter@CatalogueController: selected pretext: ' . $request->pretext_id);
         $response = array(
             'status' => 'success',
                           
             'selected_title' => $request->title,
             'selected_composer_id' => $request->composer_id,
-            'selected_numberOfVoices' => $request->numberOfVoices,
+            'selected_numberOfVoices' => $request['numberOfVoices'],
             'selected_instrumentation_id' => $request->instrumentation_id,
             'selected_epoque_id' => $request->epoque_id,
             'selected_cantus_id' => $request->cantus_id,
             'selected_ensemble_id' => $request->ensemble_id,
             'selected_language_id' => $request->language_id,
             'selected_opus_id' => $request->opus_id,
+            'selected_pretext_id' => $request->pretext_id,
+            'selected_difficulty_id' => $request->difficulty_id,                
             
             'pieces' => $filtered_pieces,
-            'count' => $filtered_pieces->count(),      
+            'count' => $filtered_pieces->count(),
             'titles' => $filtered_titles,
             'composers' => $filtered_composers,
             'opusses' => $filtered_opusses,
             'epoques' => $filtered_epoques,
             'difficulties' => $filtered_difficulties,
-            'numbersOfVoices' => $filtered_numbersOfVoices,
+            'numberOfVoices' => $filtered_numberOfVoices,
             'ensembles' => $filtered_ensembles,
             'instrumentations' => $filtered_instrumentations,
             'cantusses' => $filtered_cantusses,
             'languages' => $filtered_languages,
-            'roots' => $filtered_roots,
+            'pretexts' => $filtered_pretexts,
 
               );
           return response()->json($response); 

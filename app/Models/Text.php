@@ -18,14 +18,15 @@ class Text extends Model
       return $this->belongsTo('App\Models\Person','lyricist_id');
     }
   
-    public function preText(){
-      return $this->belongsTo('App\Models\Text', 'preText_id');
+    public function pretext(){
+           return $this->belongsTo('App\Models\Text', 'pretext_id');
     }
+    
 
   // n-to-1
   
     public function derivates(){
-      return $this->hasMany('App\Models\Text', 'preText_id');
+      return $this->hasMany('App\Models\Text', 'pretext_id');
     }
     
   // n-to-n
@@ -47,11 +48,13 @@ class Text extends Model
     }
 
     public function root() {   // get the most basal preText of this text
-        if ( $this['preText_id'] <> 0 ){
-            return $this->preText->root();
+        if ( $this->pretext()->first() ){
+            return $this->pretext()->root();
+            Log::info($this['title'] . 'has a pretext');
         }
         else {
             return $this;
+            Log::infof($this['title'] . 'is root');
         }
     }  
 }

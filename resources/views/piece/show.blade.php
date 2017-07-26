@@ -15,7 +15,7 @@
         'difficulty' => ['caption' => 'Schwierigkeit', 'var' => $data['difficulty']],
         'cantus' => ['caption' => 'Cantus', 'var' => $data['cantus']],
         'language' => ['caption' => 'Sprache', 'var' => $data['language']],
-        'preText' => ['caption' => 'Textwurzel', 'var' => $data['preText']],
+        'preText' => ['caption' => 'Prätext', 'var' => $data['preText']],
     ];
     
     $download_items = [
@@ -33,7 +33,7 @@
                 <div class="micro-box micro-shadow">
                     <div class="box-title">Komponist*in</div>
                     <div>
-                        {{ $data['composer']['name'] }} {{ $data['composer']['dates'] }}
+                        {{ $data['composer']['name'] }}<br>{{ $data['composer']['dates'] }}
                      </div>
                      @if ($data['composer']['image'] <> NULL)
                      <img 
@@ -50,7 +50,7 @@
                 <div class="micro-box micro-shadow">
                     <div class="box-title">Dichter*in</div>
                     <div>
-                        {{ $data['lyricist']['name'] }} {{ $data['lyricist']['dates'] }}
+                        {{ $data['lyricist']['name'] }} <br>{{ $data['lyricist']['dates'] }}
                      </div>
                      @if ($data['lyricist']['image'] <> NULL)
                      <img 
@@ -74,7 +74,15 @@
                     <div class="col-md-4 caption">{{ $item['caption'] }}</div>
                     <div class="col-md-8">{{ $item['var'] }} </div>
                 @endforeach
-                </div>    
+
+                    <div class="col-md-4 caption">Quelle(n)</div>
+                    <div class="col-md-8">
+                        @foreach ( $data['sources'] as $source )
+                           {!! $source->getHTMLString() !!}.
+                        @endforeach
+                        </div>
+                
+                </div>                     
             </div>
         </div>
     </div>
@@ -86,7 +94,12 @@
                 <div class="row">
                 @foreach ($download_items as $item)
                     <div class="col-md-4 caption">{{ $item['caption'] }}</div>
-                    <div class="col-md-8"><a href="{{ $item['link'] }}" target="_blank">{{ $item['var'] }}</a></div>
+                    @if ($item['caption'] == "Quellcode")
+                        <div class="col-md-8"><a href="{{ $item['link'] }}" target="_blank" class="external">
+                    @else  
+                        <div class="col-md-8"><a href="{{ $item['link'] }}" target="_blank">
+                    @endif
+                    {{ $item['var'] }}</a></div>
                 @endforeach
                 </div>    
             </div>

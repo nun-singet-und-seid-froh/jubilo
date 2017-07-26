@@ -2,13 +2,15 @@
 
 @section('head')
      <script src="{{ asset('js/catalogue-filter.js') }}"></script>
-     <script src="{{ asset('js/icon-check.js') }}"></script>
 @endsection
 
 @section('page-content')
 
 <div class="title row">
     Katalog
+    <div class="title-sub">
+        <a class="hint-link" href="/catalogue/help" target="_blank">Hilfe zur Benutzung des Katalogs</a>
+    </div>
 </div>
 
 
@@ -30,7 +32,7 @@
         <select id="composers">
             <option value=""></option>
             @foreach ( $data['composers'] as $composer) 
-            <option value="{{ $composer['id'] }}">{{ $composer['lastName'] }}, {{ $composer['firstName'] }} {{ $composer['intername'] }}</option>
+            <option value="{{ $composer['id'] }}">{{ $composer->fullNameString('lastNameFirst')}} ({{$composer->dateString() }})</option>
             @endforeach
         </select>
     </div>
@@ -89,11 +91,11 @@
     </div>
 
     <div class="col-lg-3 col-md-3 col-sm-6">
-        <div>Textwurzel</div>
-        <select id="roots">
+        <div>Prätext</div>
+        <select id="pretexts">
             <option value=""></option>
-            @foreach ( $data['roots'] as $root) 
-            <option value="{{ $root['id'] }}">{{ $root['title'] }}</option>
+            @foreach ( $data['pretexts'] as $pretext) 
+            <option value="{{ $pretext['id'] }}">{{ $pretext['title'] }}</option>
             @endforeach
         </select>
     </div>
@@ -113,7 +115,7 @@
 
     <div class="col-lg-3 col-md-3 col-sm-6">
         <div>Stimmenzahl</div>
-        <select id="numbersOfVoices">
+        <select id="numberOfVoices">
             <option value=""></option>
             @foreach ( $data['numberOfVoices'] as $number) 
             <option value="{{ $number }}">{{ $number }}</option>
@@ -149,7 +151,11 @@
 
     <div class="catalogue-item micro-box micro-shadow">
         <div class="composer-name">
-            {{ $piece->composers()->first()->fullNameString("firstNameFirst") }}
+            @if ( $piece->composers()->first() )
+                {{ $piece->composers()->first()->fullNameString("firstNameFirst") }}
+            @else
+                !!! Falsch hochgeladenes Stück !!!
+            @endif
          </div>   
         <div class="piece-title">
             <a href="{{ route('showPiece', $piece['id']) }}">{{ $piece['title'] }}</a>

@@ -18,6 +18,7 @@ class CreateEpoquesTable extends Migration
         $table->timestamps();
         $table->string('name');
         $table->integer('super_epoque_id');
+        $table->integer('rank');
       });
     }
 

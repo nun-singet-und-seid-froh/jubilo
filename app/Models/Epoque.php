@@ -23,8 +23,7 @@ class Epoque extends Model
     public function pieces(){
         return $this->hasMany('App\Models\Piece');
     }
-
-    
+  
   // n-to-1
 
     public function isSubEpoqueOf() {

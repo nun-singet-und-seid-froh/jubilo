@@ -10,7 +10,7 @@
    </div>
   
   <div id="logo">
-    <img src="{{ asset('images/logo.png') }}">
+    <img src="{{ asset('images/logo_rot.png')}}" width="50%">
   </img>
   
 @endsection

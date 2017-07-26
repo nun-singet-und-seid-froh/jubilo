@@ -19,7 +19,7 @@ class CreatePiecesTable extends Migration
           $table->timestamps();
           $table->string('title')->default(NULL);
           $table->integer('editionNumber')->default(0);
-          $table->integer('year')->default(NULL);
+          $table->integer('year')->default(NULL)->nullable();
           $table->string('permalink')->default(0);
           $table->integer('visits')->default(0);
 

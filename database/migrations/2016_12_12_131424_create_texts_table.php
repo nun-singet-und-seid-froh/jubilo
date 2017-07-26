@@ -18,7 +18,7 @@ class CreateTextsTable extends Migration
         $table->timestamps();
         $table->string('title');
         
-        $table->integer('preText_id');
+        $table->integer('pretext_id');
         $table->integer('lyricist_id');
        });
     }

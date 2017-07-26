@@ -70,7 +70,6 @@ class Person extends Model
   ////////////////////////////////////////////
     
     public function setPosition($positionString) {
-        
         $position = Position::where('name', $positionString)->first();
         if ( $position ) {
             $this->positions()->attach($position);

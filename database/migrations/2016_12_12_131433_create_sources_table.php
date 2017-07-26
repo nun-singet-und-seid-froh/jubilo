@@ -17,9 +17,15 @@ class CreateSourcesTable extends Migration
         $table->increments('id');
         $table->timestamps();
         $table->string('title');
+        $table->string('editors');
         $table->integer('year');
+        $table->string('publisher');
         $table->string('publisherAddress');
-        
+        $table->string('url');
+        $table->string('comment');
+        $table->string('license');
+        $table->string('fileName');
+        $table->boolean('isPubliclyAvailable');
       });
       
     }

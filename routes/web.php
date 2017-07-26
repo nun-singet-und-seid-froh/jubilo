@@ -19,6 +19,8 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index');
 
+
+Route::get('/permission', function() { return view('errors.permissions'); });
 /*
  *      ABOUT
  */
@@ -36,15 +38,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/board', 'BoardController@index')->name('indexBoard');
 
     // PUBLISH
-    Route::get('/piece/publish', 'PieceController@publish')->name('addPiece');
-    Route::post('/piece/store', 'PieceController@store')->name('storePiece');
-    Route::get('/piece/published/{id}', 'PieceController@publishSucces')->name('publishedPiece');
+    Route::get('/piece/publish', 'PieceController@publish')->name('addPiece')->middleware('unconfirmed');
+    
+    Route::post('/piece/store', 'PieceController@store')->name('storePiece')->middleware('unconfirmed');
+    Route::get('/piece/published/{id}', 'PieceController@publishSucces')->name('publishedPiece')->middleware('unconfirmed');
+  
+    Route::post('image/raw', 'ImageController@uploadRaw')->name('uploadRawImage')->middleware('unconfirmed');
+    Route::post('image/store', 'CropController@store')->name('storeImage')->middleware('unconfirmed');
+});
 
-    Route::post('/image/prepare', 'ImageController@prepare')->name('prepareImage');
+    Route::get('admin/users', 'AdminController@showUsers')->name('showUsers')->middleware('admin');
 
-    });
-
-
+    Route::post('admin/updateusers', 'AdminController@updateUsers')->name('updateUsers')->middleware('admin');
+    
     Route::get('/logout', function() { 
         Auth::logout(); 
         return view ('start');
@@ -56,6 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/catalogue', 'CatalogueController@show')->name('showCatalogue');
 Route::post('catalogue-filter', 'CatalogueController@filter')->name('filterCatalogue');
+Route::get('/catalogue/help', function() { return view('catalogue.help'); } );
 
 /*
  *  SHOW PIECE
