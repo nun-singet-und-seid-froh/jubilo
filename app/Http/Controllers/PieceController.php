@@ -544,8 +544,10 @@ class PieceController extends Controller
             
             Log::info('Lyricist has been created. Lyricist_id is: ' . $lyricist['id']);
             }         
-           
-            $text->lyricist()->associate($lyricist);
+            
+            if ( lyricist() ) {
+                $text->lyricist()->associate($lyricist);
+            }
             $text->save();
                     
             $text->languages()->attach($language);
