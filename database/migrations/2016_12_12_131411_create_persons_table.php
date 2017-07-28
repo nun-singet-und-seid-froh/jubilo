@@ -19,7 +19,7 @@ class CreatePersonsTable extends Migration
           $table->string('firstName')->default(NULL)->nullable();
           $table->string('interName')->default(NULL)->nullable();
           $table->string('lastName')->default(NULL);
-          $table->unique(['firstName', 'interName', 'lastName']);
+          $table->unique(['firstName', 'interName', 'lastName'])->default(NULL);
           
           $table->integer('birthYear')->default(NULL);
           $table->boolean('birthYearCertainty')->default(true);          
