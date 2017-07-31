@@ -635,8 +635,6 @@ class PieceController extends Controller
                     }
   
                     $piece->sources()->attach($source);
-
-
                 }
             
             // ATTACH EVERYTHING

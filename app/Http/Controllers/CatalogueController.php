@@ -17,6 +17,7 @@ use App\Models\Ensemble;
 use App\Models\Opus;
 use Illuminate\Contracts\Pagination;
 
+
 class CatalogueController extends Controller
 {
     public function show()
@@ -33,7 +34,18 @@ class CatalogueController extends Controller
 
         // fetch all Epoques with at least one published piece
 
-        $data['epoques'] = Epoque::has('pieces')->get();        
+        $data['epoques'] = Epoque::has('pieces')->get();
+        foreach ($data['epoques'] as $epoque){
+            $superEpoque = $epoque->isSubEpoqueOf;
+            if ( $superEpoque ) {
+                if( ! $data['epoques']->contains($superEpoque->id ) ) {
+                    $data['epoques']->push($superEpoque);
+               }
+            }
+        }
+        
+        // sort by rank
+        $data['epoques'] = $data['epoques']->sortBy('rank');
         
         // instrumentations, count of Voices and gender
         $data['instrumentations'] = Instrumentation::all();
@@ -127,7 +139,24 @@ class CatalogueController extends Controller
             $composer['string'] = $composer->fullNameString('lastNameFirst') . ' (' . $composer->dateString() . ')';
         }                    
         $filtered_opusses = Opus::findMany($filtered_pieces->unique('opus_id')->pluck('opus_id'));
+        
         $filtered_epoques = Epoque::findMany($filtered_pieces->unique('epoque_id')->pluck('epoque_id'));
+        
+        // add those Epoques which do not have a piece on their own, but are superEpoques of 
+        // Epoques which do so.
+        foreach ( $filtered_epoques as $epoque ) {
+            if ( $epoque->isSubEpoqueOf()->first() ) {
+                $id = $epoque->isSubEpoqueOf->id;
+                if ( ! $filtered_epoques->contains( $id ) ) {
+                    $filtered_epoques->push($epoque->isSubEpoqueOf );
+                }
+            }
+        }
+        
+        $filtered_epoques = $filtered_epoques->sortBy('rank');
+        $filtered_epoques = $filtered_epoques->values();
+        
+        Log::info('filtered_epoques: ' . $filtered_epoques);
         
         $filtered_difficulties = Difficulty::findMany($filtered_pieces->unique('difficulty_id')->pluck('difficulty_id'));
         $filtered_instrumentations = Instrumentation::findMany($filtered_pieces->unique('instrumentation_id')->pluck('instrumentation_id'));
@@ -156,7 +185,6 @@ class CatalogueController extends Controller
         
         $filtered_languages = collect([]);
         $filtered_pretexts = collect([]);
-        Log::info('filter@CatalogueController: $filtered_texts: ' . $filtered_texts);
         
         foreach ($filtered_texts as $text){
              if ($text['pretext_id'] <> 0) {

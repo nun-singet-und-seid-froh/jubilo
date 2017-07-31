@@ -80,11 +80,11 @@ $(document).ready(function(){
                 });
                 
                 // the epoques select
-                console.log("Epoque: " + response.selected_epoque_id);
+                console.log(response.epoques);
                 $("#epoques").empty();                
                 $("#epoques").append("<option value=''></option>");              
                 $.each(response.epoques, function( index, epoque )  {
-                    if ( epoque.id == response.selected_epoque_id){
+                    if ( epoque.id == response.selected_epoque_id ){
                         var select = "selected";
                     }
                     else {

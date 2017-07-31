@@ -121,7 +121,12 @@ class Piece extends Model
         
         // if the epoque of the piece is a subepoque of the given, check shall pass
     
-        if ( ($filter['epoque_id'] <> '') and $this['epoque_id'] <> $filter['epoque_id'] ){
+        if ( 
+            ($filter['epoque_id'] <> '') and 
+            ($this['epoque_id'] <> $filter['epoque_id'] ) and
+            ($this->epoque->super_epoque_id <> $filter['epoque_id'] )
+        )
+        {
                 return FALSE;
         }
 
