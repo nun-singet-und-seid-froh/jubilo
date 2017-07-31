@@ -16,7 +16,7 @@
         <ul class="errors"></ul>
     </div>
     
-    <table class="userstable">
+    <table class="boardtable">
         <tr class="header-row">    
             <th>User</th>
             <th>Angelegt</th>

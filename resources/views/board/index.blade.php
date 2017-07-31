@@ -5,10 +5,17 @@
 <div class="title row">
     Redaktionsbereich
 </div>
-    
-<ul>
+
+
+<h1>Redaktionsfunktionen</h1>
+<h2>Neu eintragen</h2>
     <li><a href="/piece/publish">Neues Stück eintragen</a></li>
+
+<h2>Übersichten</h2>
+    <li><a href="/board/epoques">Epochen</a></li>
+    
+<h1>Admin-Funktionen</h1>    
     <li><a href="/admin/users">Userverwaltung</a></li>
-    <li><a href="/logout">Ausloggen</a></li>
-</ul>
+
+<a class="pullright" href="/logout">Ausloggen</a>
 @endsection

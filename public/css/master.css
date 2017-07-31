@@ -172,7 +172,7 @@ button {
 }
 
 #logo {
-  width:50%;
+  width:60vH;
   margin:80px auto 0 auto;
 }
 
@@ -308,17 +308,17 @@ select, input {
  *                ADMIN                   *
  *****************************************/
 
-.userstable {
+.boardtable {
     width:100%;
 }
 
-.userstable th, .userstable td, .userstable tr {
+.boardtable th, .boardtable td, .boardtable tr {
     border: 1px solid black;
 }
-.userstable tr:nth-child(2) {
+.boardtable tr:nth-child(even) {
     background:#DDD;
 }
 
-.userstable td, .userstable th {
+.boardtable td, .boardtable th {
     padding:10px;
 }

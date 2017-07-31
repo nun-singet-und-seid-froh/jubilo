@@ -35,7 +35,7 @@ Route::get('/about', function() { return view('about'); });
 Route::group(['middleware' => 'auth'], function () {
     
     // EDITORIAL BOARD
-    Route::get('/board', 'BoardController@index')->name('indexBoard');
+    Route::get('/board', 'BoardController@index')->name('indexBoard')->middleware('unconfirmed');
 
     // PUBLISH
     Route::get('/piece/publish', 'PieceController@publish')->name('addPiece')->middleware('unconfirmed');
@@ -50,6 +50,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/users', 'AdminController@showUsers')->name('showUsers')->middleware('admin');
 
     Route::post('admin/updateusers', 'AdminController@updateUsers')->name('updateUsers')->middleware('admin');
+    
+    Route::get('board/epoques', 'EpoquesController@index')->name('indexEpoques')->middleware('unconfirmed');
+    
+    Route::post ('board/epoques/update', 'EpoquesController@update')->name('updateEpoques')->middleware('unconfirmed');
     
     Route::get('/logout', function() { 
         Auth::logout(); 
