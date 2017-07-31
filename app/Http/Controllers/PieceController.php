@@ -62,7 +62,7 @@ class PieceController extends Controller
           $view_data['composer']['image']['hint'] = $piece->composers->first()->image->hint();
         }
         else{
-          $view_data['composer']['image'] = NULL;
+          $view_data['composer']['image'] = "0";
         }
 
         // lyricist
