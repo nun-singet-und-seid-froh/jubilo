@@ -16,9 +16,9 @@ class CreatePersonsTable extends Migration
         Schema::create('persons', function (Blueprint $table) {
           $table->increments('id');
           $table->timestamps();
-          $table->string('firstName')->default(NULL)->nullable();
-          $table->string('interName')->default(NULL)->nullable();
-          $table->string('lastName')->default(NULL);
+          $table->string('firstName', 100)->default(NULL)->nullable();
+          $table->string('interName', 50)->default(NULL)->nullable();
+          $table->string('lastName', 100)->default(NULL);
           $table->unique(['firstName', 'interName', 'lastName'])->default(NULL);
           
           $table->integer('birthYear')->default(NULL);

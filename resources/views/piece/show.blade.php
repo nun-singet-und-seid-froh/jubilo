@@ -35,7 +35,7 @@
                     <div>
                         {{ $data['composer']['name'] }}<br>{{ $data['composer']['dates'] }}
                      </div>
-                     @if ($data['composer']['image'] <> NULL)
+                     @if ($data['composer']['image'] <> "0")
                      <img 
                         class="hidden-sm hidden-xs"
                         src="{{ $data['composer']['image']['href'] }}" 
