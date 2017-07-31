@@ -48,7 +48,7 @@ class CatalogueController extends Controller
         $data['epoques'] = $data['epoques']->sortBy('rank');
         
         // instrumentations, count of Voices and gender
-        $data['instrumentations'] = Instrumentation::all();
+        $data['instrumentations'] = Instrumentation::orderBy('name')->get();
        
         $data['opusses'] = Opus::all();
         
