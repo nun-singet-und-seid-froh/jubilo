@@ -545,7 +545,7 @@ class PieceController extends Controller
             Log::info('Lyricist has been created. Lyricist_id is: ' . $lyricist['id']);
             }         
             
-            if ( lyricist() ) {
+            if ( $lyricist ) {
                 $text->lyricist()->associate($lyricist);
             }
             $text->save();
@@ -617,10 +617,7 @@ class PieceController extends Controller
                         $source['isPubliclyAvailable'] = $sourceData['isPubliclyAvailable'];
                         
                         // store the scan, if one is given
-                        if ( $request['source-scan-' . $index] ) {
-                            Log::info('scan!');
-                            
-                            
+                        if ( $request->hasFile('source-scan-' . $index) ) {
                             $sourceFileName = 
                                 $sourceData['editors'] . ': ' 
                                 . $sourceData['title'] . '. ' 
