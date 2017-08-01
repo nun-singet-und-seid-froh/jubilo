@@ -195,7 +195,7 @@ class PieceController extends Controller
                 $position->where('name', 'composer');
             }
         )->orderBy('lastName')->get();
-        $view_data['opusses'] = Opus::has('pieces')->orderBy('title')->get();
+        $view_data['opusses'] = Opus::all();
         $view_data['titles'] = $titles;
         $view_data['difficulties'] = Difficulty::all();
         $view_data['epoques'] = Epoque::orderBy('name')->get();
