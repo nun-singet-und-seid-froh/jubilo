@@ -70,10 +70,13 @@ class PieceController extends Controller
         $view_data['lyricist']['name'] = $piece->text->lyricist->fullNameString('firstNameFirst');
         $view_data['lyricist']['dates'] = $piece->text->lyricist->dateString();
 
-            if ( $piece->text->lyricist->image['id'] <> 0 ) {
+            if ( $piece->text->lyricist->image()->count() ) {
               $view_data['lyricist']['image']['href'] = $piece->text->lyricist->image->path();
               $view_data['lyricist']['image']['hint'] = $piece->text->lyricist->image->hint();
-            }            
+            }    
+            else {
+                $view_data['lyricist']['image'] = "0";
+            }        
         }
         else{
             $view_data['lyricist']['name'] = "Unbekannt";
