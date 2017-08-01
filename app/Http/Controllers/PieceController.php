@@ -216,7 +216,7 @@ class PieceController extends Controller
             }
         )->orderBy('lastName')->get();
 
-        $view_data['sources'] = Source::has('pieces')->orderBy('title')->get();
+        $view_data['sources'] = Source::all();
         
         return view('piece.publish', ['data'=> $view_data]);
     }
