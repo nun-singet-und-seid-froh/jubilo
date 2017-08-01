@@ -235,6 +235,7 @@ class PieceController extends Controller
         */  
         
         $rules = [
+            'editionNumber' => 'required|unique:pieces,editionNumber',
             'title' => 'required',
             'composer_id' => 'required',
                 'composerImage' => 'required_if:composer_id,"new"',
@@ -288,6 +289,12 @@ class PieceController extends Controller
 
 
         $messages = [
+            
+            'editionNumber.required' 
+                => "Bitte gib eine <span class='emph'>Editionsnummer</span> ein.",
+
+            'editionNUmber.unique'
+                => "Diese <span class='emph'>Editionsnummer</span> gibt es bereits.",                            
             'title.required' 
                 => "Bitte gib einen <span class='emph'>Titel</span> ein.",
 
@@ -377,6 +384,7 @@ class PieceController extends Controller
              */      
                    
             $piece = new Piece;
+            $piece['editionNumber'] = $request['editionNumber'];            
             $piece['title'] = $request['title'];
 
             // YEAR
@@ -577,7 +585,7 @@ class PieceController extends Controller
                                          
             // SHEET
             $sheetFileName = 
-                $piece['id'] . ' ' .
+                $piece['editionNumber'] . ' ' .
                 $piece['title'] . ' (' .
                 $composer->fullNameString('lastNameFirst') . 
                 ').pdf';
