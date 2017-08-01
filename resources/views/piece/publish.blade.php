@@ -22,7 +22,8 @@
         <ul class="errors"></ul>
     </div>
 
-
+    @include('piece.dataitem', ['type'=>'input', 'level'=>'top', 'label'=>"Editionsnummer", 'id'=>'editionNumber'])
+    
     @include('piece.dataitem', ['type'=>'input', 'level'=>'top', 'label'=>"Titel", 'id'=>'title'])
 
     <div class="row micro-box micro-shadow">

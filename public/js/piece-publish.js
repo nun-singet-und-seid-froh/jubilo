@@ -134,6 +134,7 @@ $(document).ready(function() {
      */
    
     $('button#submit').click(function(){
+        formData.set('editionNumber', $('#editionNumber').val());
         formData.set('title', $('#title').val());
         formData.set('composer_id', $('#composer').val());
         formData.set('composerFirstName', $('#composer-firstName').val());
