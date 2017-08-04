@@ -23,9 +23,8 @@ class CatalogueController extends Controller
     public function show()
     {
         // fetch all published pieces
-        $data['pieces'] = Piece::orderBy('title')->get();
-        $data['count'] = count($data['pieces']);
-
+        $data['pieces'] = Piece::orderBy('title')->get();        
+       
         // fetch all persons that are composers of a published piece
 
         $data['composers'] = Person::has('pieces')->orderBy('lastName')->get();
@@ -79,6 +78,12 @@ class CatalogueController extends Controller
         $data['cantusses'] = Cantus::all();
         $data['texts'] = Text::all();
         $data['pretexts'] = Text::where('pretext_id', 0)->orderBy('title')->get();
+        
+        
+        $data['piece-count'] = count($data['pieces']);
+        $data['language-count'] = count($data['languages']);
+        $data['epoque-count'] = count($data['languages']);
+        $data['composer-count'] = count($data['composers']);
         
         return view('catalogue.show', ['data'=>$data]);
     }

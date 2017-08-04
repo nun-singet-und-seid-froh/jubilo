@@ -34,8 +34,8 @@ class PieceController extends Controller
 *                SHOW                        *
 *********************************************/
     
-    public function show($editionNumber) {
-      $piece = Piece::where('editionNumber', $editionNumber)->first();
+    public function show($id) {
+      $piece = Piece::find($id);
 
       if ( $piece ) {  
 
@@ -70,14 +70,10 @@ class PieceController extends Controller
         $view_data['lyricist']['name'] = $piece->text->lyricist->fullNameString('firstNameFirst');
         $view_data['lyricist']['dates'] = $piece->text->lyricist->dateString();
 
-            if ( $piece->text->lyricist->image()->count() ) {
+            if ( $piece->text->lyricist->image['id'] <> 0 ) {
               $view_data['lyricist']['image']['href'] = $piece->text->lyricist->image->path();
               $view_data['lyricist']['image']['hint'] = $piece->text->lyricist->image->hint();
-
-            }
-            else {
-                $view_data['lyricist']['image'] = 0;
-            }     
+            }            
         }
         else{
             $view_data['lyricist']['name'] = "Unbekannt";
@@ -104,10 +100,6 @@ class PieceController extends Controller
         else {
             $view_data['cantus'] = "–";
         }
-        
-        
-        // text
-        $view_data['text'] = $piece->text->title;              
         
         // language
         $view_data['language'] = $piece->text->languageString();      
@@ -148,13 +140,13 @@ class PieceController extends Controller
         }
        
        // pdf
-       $view_data['pdf']['string'] = $piece->sheet()->first()->fileName;
+       $view_data['pdf']['string'] = ".pdf";
        $view_data['pdf']['link'] = $piece->sheet->path();
        
        // midi
        
        if ( $piece->midifiles()->count() > 0) {
-           $view_data['midi']['string'] = $piece->midifiles()->first()->fileName;
+           $view_data['midi']['string'] = ".zip";
            $view_data['midi']['link'] = $piece->midifiles()->first()->path();
        }
        else {
@@ -661,14 +653,14 @@ class PieceController extends Controller
             
             $response = [
                 'status' => 'success',
-                'piece_editionNumber' => $piece['editionNumber'],
+                'piece_id' => $piece['id'],
             ];                     
        }
 
        return response()->json($response);
     }
   
-    public function publishSucces($editionNumber){
-        return view('piece.published', ['piece_editionNumber'=>$editionNumber]);
+    public function publishSucces($id){
+        return view('piece.published', ['piece_id'=>$id]);
     }
 }

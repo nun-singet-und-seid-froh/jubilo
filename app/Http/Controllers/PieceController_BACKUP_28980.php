@@ -73,11 +73,17 @@ class PieceController extends Controller
             if ( $piece->text->lyricist->image()->count() ) {
               $view_data['lyricist']['image']['href'] = $piece->text->lyricist->image->path();
               $view_data['lyricist']['image']['hint'] = $piece->text->lyricist->image->hint();
-
+<<<<<<< HEAD
+            }    
+            else {
+                $view_data['lyricist']['image'] = "0";
+            }        
+=======
             }
             else {
                 $view_data['lyricist']['image'] = 0;
             }     
+>>>>>>> 851c45b91a52cb8b2572e817dc57217f474b8cee
         }
         else{
             $view_data['lyricist']['name'] = "Unbekannt";
