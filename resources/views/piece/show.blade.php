@@ -49,12 +49,12 @@ $download_items = [
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 micro-column"><!-- lyricist -->
                 <div class="micro-box micro-shadow">
-                    <div classbrew cask install diffmerge="box-title">Dichter*in</div>
+                    <div class="box-title">Dichter*in</div>
                     <div>
                         {{ $data['lyricist']['name'] }} <br>{{ $data['lyricist']['dates'] }}
 
                     </div>
-                    @if ($data['lyricist']['image'] <> "0" )
+                    @if ( ($data['lyricist']['image'] <> "0" ) and ( $data['lyricist']['name'] <> "Unbekannt" ) )
                     <img 
                         class="hidden-sm hidden-xs"
                         src="{{ $data['lyricist']['image']['href'] }}" 

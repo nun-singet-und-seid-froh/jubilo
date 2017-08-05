@@ -235,7 +235,7 @@ $(document).ready(function() {
                    });
                }
                if (response.status == 'success'){ // "redirect" to success page
-                   window.location.replace('/piece/published/' + response.piece_id);
+                   window.location.replace('/piece/published/' + response.piece_editionNumber);
                }
             },
             error: function(response){

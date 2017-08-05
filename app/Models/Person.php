@@ -89,14 +89,14 @@ class Person extends Model
       $lastName = $this['lastName'];
       
       if ($this['interName']) {
-        $interName = ' ' . $this['interName'] . ' ';
+        $interName = $this['interName'] . ' ';
       }
       else {
-        $interName = ' ';
+        $interName = '';
       }
       
       if ( $nameOrder == "lastNameFirst") {
-        return $lastName . ',' . $interName . $firstName;
+        return $interName . $lastName . ', ' . $firstName;
       }
       return $firstName . $interName . $lastName;
     }

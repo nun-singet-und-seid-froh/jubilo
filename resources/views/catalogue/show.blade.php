@@ -74,7 +74,7 @@
         <select id="lyricists">
             <option value=""></option>
             @foreach ( $data['lyricists'] as $lyricist) 
-            <option value="{{ $lyricist['id'] }}">{{ $lyricist['lastName'] }}, {{ $lyricist ['firstName'] }} {{ $lyricist['intername'] }}</option>
+            <option value="{{ $lyricist['id'] }}">{{ $lyricist->fullNameString('lastNameFirst') }}, ({{ $lyricist->dateString() }})</option>
             @endforeach
         </select>
     </div>
@@ -144,7 +144,7 @@
     </div>
  
 </div>
-<div class="row counter"><span id="counter-number">{{ $data['count'] }}</span> Titel</div>
+<div class="row counter"><span id="counter-number">{{ $data['piece-count'] }}</span> Titel</div>
 
 <div class="row pieces">
     @foreach ( $data['pieces'] as $piece )
@@ -158,7 +158,7 @@
             @endif
          </div>   
         <div class="piece-title">
-            <a href="{{ route('showPiece', $piece['id']) }}">{{ $piece['title'] }}</a>
+            <a href="{{ route('showPiece', $piece['editionNumber']) }}">{{ $piece['title'] }}</a>
         </div>
         <div class="informations">
             <ul class="informations">

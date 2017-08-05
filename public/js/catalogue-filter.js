@@ -168,7 +168,22 @@ $(document).ready(function(){
                     
                     $("#cantusses").append('<option value="' + cantus.id + '"' + select + ">" + cantus.title + "</option>");
                 });
+
+                // the lyricists select
+                $("#lyricists").empty();
+                $("#lyricists").append("<option value=''></option>");              
                 
+                $.each(response.lyricists, function( index, lyricist )  {
+                    if ( lyricist.id == response.selected_lyricist_id){
+                        var select = "selected";
+                    }
+                    else {
+                        var select = "";
+                    }
+                    
+                    $("#lyricists").append('<option value="' + lyricist.id + '"' + select + ">" + lyricist.string + "</option>");
+                });
+                                
                 // the languages select
                 console.log("Language: " + response.selected_language_id);
                 $("#languages").empty();                

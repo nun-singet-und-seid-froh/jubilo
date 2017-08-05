@@ -273,17 +273,11 @@ class PieceController extends Controller
                 'textLanguage_id' => 'required_if:text_id,"new"',
                     'textLanguageName' => 'unique:languages,name|required_if:textLanguage_id,"new"',
 
-                'lyricistImage' => 'required_if:lyricist_id,"new"',
-                'lyricistImageDescription' => 'required_if:lyricist_id,"new"',
-                'lyricistImageLicense' => 'required_if:lyricist_id,"new"',
-                'lyricistImageSource' => 'required_if:lyricist_id,"new"',                
+
                 'lyricistLastName' =>'required_if:lyricist_id,"new"|unique_with:persons, lyricistLastName = lastName, lyricistInterName = interName, lyricistFirstName = firstName',
 
                 'lyricistBirthYear' => 'required_if:lyricist_id,"new"|numeric|max:lyricistDeathYear',
                 'lyricistDeathYear' => 'required_if:lyricist_id,"new"|numeric|max:1947',
-                'lyricistImageSource' => 'required_if:lyricist_id,"new"',
-                'lyricistImageLicense' => 'required_if:lyricist_id,"new"',   
-
                     
             'cantusTitle' => 'unique:cantusses,title|required_if:cantus_id,"new"',
             
@@ -544,20 +538,21 @@ class PieceController extends Controller
                 }   
                 $lyricist->save();
                 $lyricist->positions()->attach($lyricist_position);
-                
-            $lyricistImageFileName = $lyricist['id'] . ' ' . $lyricist->fullNameString('lastNameFirst');
-
-            $lyricistImage_path = $request->file('lyricistImage')->storeAs('public/images', $lyricistImageFileName);
-
-            $lyricistImage = new Image;
-                $lyricistImage['fileName'] = $lyricistImageFileName;
-                $lyricistImage['description'] = $request['lyricistImageDescription'];
-                $lyricistImage['source'] = $request['lyricistImageSource'];
-                $lyricistImage['license'] = $request['lyricistImageLicense'];    
-            $lyricistImage->person()->associate($lyricist);
-            $lyricistImage->save();
-            $lyricist->push();
             
+            if ( $request->hasfile('lyricistImage') ) {
+                $lyricistImageFileName = $lyricist['id'] . ' ' . $lyricist->fullNameString('lastNameFirst');
+                $lyricistImage_path = $request->file('lyricistImage')->storeAs('public/images', $lyricistImageFileName);
+
+                $lyricistImage = new Image;
+                    $lyricistImage['fileName'] = $lyricistImageFileName;
+                    $lyricistImage['description'] = $request['lyricistImageDescription'];
+                    $lyricistImage['source'] = $request['lyricistImageSource'];
+                    $lyricistImage['license'] = $request['lyricistImageLicense'];    
+                $lyricistImage->person()->associate($lyricist);
+                $lyricistImage->save();
+                $lyricist->push();
+            }
+ 
             Log::info('Lyricist has been created. Lyricist_id is: ' . $lyricist['id']);
             }         
             
@@ -604,7 +599,7 @@ class PieceController extends Controller
 
             // MIDI
             $midiFileName =  
-                $piece['id'] . ' ' .
+                $piece['editionNumber'] . ' ' .
                 $piece['title'] . ' (' .
                 $composer->fullNameString('lastNameFirst') . 
                 ').zip';

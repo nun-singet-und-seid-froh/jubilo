@@ -129,7 +129,7 @@ class CatalogueController extends Controller
                 array_push($language_array, $l['name']);
             }
             $piece->language = implode(', ', $language_array);
-            $piece->link = 'piece/show/' . $piece['id'];
+            $piece->link = 'piece/show/' . $piece['editionNumber'];
         }
         
         // get a unique list of titles, composers, etc. which are related to the filtered pieces
@@ -139,10 +139,21 @@ class CatalogueController extends Controller
             array_push($filtered_composer_ids, $piece->composers->first()->id);
         }
 
-        $filtered_composers = Person::findMany($filtered_composer_ids);
+        $filtered_composers = Person::findMany($filtered_composer_ids)->sortBy('lastName')->values();
         foreach ($filtered_composers as $composer){
             $composer['string'] = $composer->fullNameString('lastNameFirst') . ' (' . $composer->dateString() . ')';
-        }                    
+        }
+        
+        $filtered_lyricist_ids = [];
+        foreach ($filtered_pieces as $piece){
+            array_push($filtered_lyricist_ids, $piece->text->lyricist['id']);
+        }
+
+        $filtered_lyricists = Person::findMany($filtered_lyricist_ids)->sortBy('lastName')->values();
+        foreach ($filtered_lyricists as $lyricist){
+            $lyricist['string'] = $lyricist->fullNameString('lastNameFirst') . ' (' . $lyricist->dateString() . ')';
+        }
+         
         $filtered_opusses = Opus::findMany($filtered_pieces->unique('opus_id')->pluck('opus_id'));
         
         $filtered_epoques = Epoque::findMany($filtered_pieces->unique('epoque_id')->pluck('epoque_id'));
@@ -206,7 +217,6 @@ class CatalogueController extends Controller
             }
         }
         $filtered_languages = $filtered_languages->unique('name');
-        // $filtered_pretexts = $filtered_pretexts->unique();
         
         Log::info('filtered pretexts: ' . $filtered_pretexts);
         Log::info('filter@CatalogueController: selected pretext: ' . $request->pretext_id);
@@ -215,6 +225,7 @@ class CatalogueController extends Controller
                           
             'selected_title' => $request->title,
             'selected_composer_id' => $request->composer_id,
+            'selected_lyricist_id' => $request->lyricist_id,            
             'selected_numberOfVoices' => $request['numberOfVoices'],
             'selected_instrumentation_id' => $request->instrumentation_id,
             'selected_epoque_id' => $request->epoque_id,
@@ -229,6 +240,7 @@ class CatalogueController extends Controller
             'count' => $filtered_pieces->count(),
             'titles' => $filtered_titles,
             'composers' => $filtered_composers,
+            'lyricists' => $filtered_lyricists,            
             'opusses' => $filtered_opusses,
             'epoques' => $filtered_epoques,
             'difficulties' => $filtered_difficulties,
