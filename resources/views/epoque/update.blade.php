@@ -1,5 +1,4 @@
-@extends('layouts.page')
-
+@extends('layouts.board')
 
 @section('head')
     <script src="{{ asset('js/epoques-update.js') }}"></script>

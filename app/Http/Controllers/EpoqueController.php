@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Auth;
 use App\Models\Epoque;
 
-class EpoquesController extends Controller
+class EpoqueController extends Controller
 {
     public function index(){
         $epoques = Epoque::all();

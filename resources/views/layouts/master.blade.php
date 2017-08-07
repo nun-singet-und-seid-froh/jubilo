@@ -34,10 +34,8 @@
         @yield('login-header')
     </div> 
 
-    <div class="row content"> 
-      <div class="col-lg-offset-1 col-lg-10 col-md-12 col-sm-12 col-xs-12"> 
+    <div class="row content">  
         @yield('content')
-      </div>
     </div>    
     
     <div class="row footer">

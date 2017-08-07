@@ -9,7 +9,7 @@ body{
 }
  
 a {
-  color: #800032 !important;
+  color: #800032;
 }
 
 .external::after {
@@ -18,6 +18,7 @@ a {
 
 .content {
   padding-bottom:30px;
+  padding-top: 30px;
 }
 
 .title {
@@ -304,6 +305,41 @@ select, input {
     margin-left: 50px;
 }
 
+.board-navigation-col {
+    height: 100%;
+    padding:10px;
+}
+
+.board-navigation-col a::before {
+    content:"→ ";
+}
+
+.board-nav-section {
+    padding:12px;
+}
+.board-nav-section-title {
+    font-size: 24px;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.board-nav-subsection-title {
+    font-weight: bold;
+    width: 100%
+}
+
+.board-nav-list li {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.board-nav-list {
+    padding-left: 0px;
+}
+
+.board-content-col {
+    
+}
 /******************************************
  *                ADMIN                   *
  *****************************************/
@@ -314,6 +350,7 @@ select, input {
 
 .boardtable th, .boardtable td, .boardtable tr {
     border: 1px solid black;
+    vertical-align: top;
 }
 .boardtable tr:nth-child(even) {
     background:#DDD;

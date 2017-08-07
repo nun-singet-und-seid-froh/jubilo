@@ -7,15 +7,11 @@
 </div>
 
 
-<h1>Redaktionsfunktionen</h1>
-<h2>Neu eintragen</h2>
-    <li><a href="/piece/publish">Neues Stück eintragen</a></li>
-
-<h2>Übersichten</h2>
-    <li><a href="/board/epoques">Epochen</a></li>
-    
-<h1>Admin-Funktionen</h1>    
-    <li><a href="/admin/users">Userverwaltung</a></li>
-
-<a class="pullright" href="/logout">Ausloggen</a>
+Du bist angemeldet als <b>{{ Auth::user()->name }}</b> ({{ Auth::user()->email }}). 
+Du hast die folgenden  Rechte:
+</ul>
+    @foreach (Auth::user()->roles()->get() as $role)
+        <li>{{ $role['slug'] }} ({{ $role['description'] }})</li>
+    @endforeach
+</ul>
 @endsection
