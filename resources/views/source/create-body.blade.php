@@ -4,6 +4,20 @@
 </div>
 
 <div class="row">
+    <div class="col-md-4">Teil von</div>
+            <div class="col-md-8">
+            <select class="source-superSource">
+                <option value="">...</option>
+                @foreach ($data['sources'] as $source)
+                <option value={{ $source['id'] }}>
+                    {!! $source->getHTMLString() !!}
+                </option>
+                @endforeach
+            </select>
+        </div>
+</div>
+
+<div class="row">
     <div class="col-md-4">Herausgeber*in</div>
     <div class="col-md-8"><input class="source-editor"></input></div>
 </div>
@@ -21,6 +35,16 @@
 <div class="row">
     <div class="col-md-4">Verlagsort</div>
     <div class="col-md-8"><input class="source-publisherAddress"></input></div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">Bibliothek</div>
+    <div class="col-md-8"><input class="source-library"></input></div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">Signatur</div>
+    <div class="col-md-8"><input class="source-signature"></input></div>
 </div>
 
 <div class="row">

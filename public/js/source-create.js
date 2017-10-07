@@ -16,8 +16,12 @@ $(document).ready(function () {
         formData.set("publisher", $(".source-publisher").val());
         formData.set("publisherAddress", $(".source-publisherAddress").val());
         formData.set("url", $(".source-url").val());
+	formData.set("signature", $(".source-signature").val());
+	formData.set("library", $(".source-library").val());
         formData.set("comment", $(".source-comment").val());
         formData.set("license", $(".source-license").val());
+	formData.set("superSource_id", $(".source-superSource").val());
+	console.log("superSource_id: " + $(".source-superSource").val());
         formData.set("isPubliclyAvailable", $(".source-available").is(':checked'));
         formData.set('scan', $(".source-scan")[0].files[0]);
 

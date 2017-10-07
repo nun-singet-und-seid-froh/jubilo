@@ -98,7 +98,10 @@ $download_items = [
                         <div class="col-md-4 caption">Quelle(n)</div>
                         <div class="col-md-8">
                             @foreach ( $data['sources'] as $source )
-                            {!! $source->getHTMLString() !!}.
+                            {!! $source->getHTMLString() !!}. 
+							@if ( $source->isSubSourceOf()->first() )
+ 								In: {!! $source->isSubSourceOf()->first()->getHTMLString() !!}. 
+							@endif
                             @endforeach
                         </div>
                     </div>           

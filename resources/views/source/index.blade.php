@@ -17,6 +17,7 @@
             <th>Scan</th>
             <th>Link</th>
             <th>Stücke</th>
+			<th>In</th>
             
             
         </tr>        
@@ -29,7 +30,7 @@
             <td>{{ $source['year'] }}</td>
             <td>
                 @if ( $source['fileName'] ) 
-                    <a target="_blank" href="/public/sources/{{ $source['fileName'] }}">.pdf</a>
+                    <a target="_blank" href="/public/sources/{{ $source['fileName'] }}">{{ $source->getHTMLString() }}</a>
                 @endif
             </td>
             <td><a target="_blank" href={{ $source['url'] }} >{{ $source['url'] }}</a></td>
@@ -39,7 +40,11 @@
                     <a target="_blank" href="/piece/show/{{ $piece['editionNumber'] }}">{{ $piece->composers()->first()->fullNameString('firstNameFirst') }}: {{ $piece['title'] }}</a>, 
                 @endforeach
             </td>
-        </tr>
+			<td>@if ( $source->isSubSourceOf()->first() )
+				{!! $source->isSubSourceOf()->first()->getHTMLString() !!}
+				@endif
+			</td>
+        </tr>  
     @endforeach
     </table>
 </div>
