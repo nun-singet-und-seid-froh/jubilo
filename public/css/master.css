@@ -340,6 +340,28 @@ select, input {
 .board-content-col {
     
 }
+
+
+ /*
+  * ERRATUM
+  */
+
+.erratum-status-submitted {
+	background: red;
+}
+
+.erratum-status-approved {
+	background: yellow;
+}
+
+.erratum-status-refused {
+	background: orange;
+}
+
+.erratum-status-closed {
+	background: green;
+}
+
 /******************************************
  *                ADMIN                   *
  *****************************************/

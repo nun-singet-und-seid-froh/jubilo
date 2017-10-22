@@ -7,7 +7,7 @@ use App\Models\Position;
 
 class Person extends Model
 {
-    public $table = "persons";
+	public $table = "persons";
     
   ////////////////////////////////////////////
   //               RELATIONS                //
@@ -89,10 +89,10 @@ class Person extends Model
       $lastName = $this['lastName'];
       
       if ($this['interName']) {
-        $interName = $this['interName'] . ' ';
+        $interName = ' ' . $this['interName'] . ' ';
       }
       else {
-        $interName = '';
+        $interName = ' ';
       }
       
       if ( $nameOrder == "lastNameFirst") {
