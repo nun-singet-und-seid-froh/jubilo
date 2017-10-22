@@ -66,6 +66,10 @@ class Piece extends Model
   //               FUNCTIONS                //
   ////////////////////////////////////////////    
 
+	public function getString() {	 
+		return $this['title'] . ' [' . $this->composers->first()->fullNameString('firstNameFirst') . ']';
+	}
+
     public function isPublished() {
       if ($this['editionNumber'] == 0) {
         return false;

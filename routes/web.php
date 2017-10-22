@@ -57,17 +57,25 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/board/store/source', 'SourceController@store')->name('storeSource')->middleware('board');
     Route::get('/board/created/source/', 'SourceController@created')->name('createdSource')->middleware('board');
     Route::get('board/list/source', 'SourceController@index')->name('listSource')->middleware('board');
+
+	Route::get('/board/erratums/', 'ErratumController@index')->name('listErratum')->middleware('board');
+
+	Route::post('/board/update/erratum/', 'ErratumController@update')->name('update')->middleware('board');
+
+
     Route::get('/logout', function() { 
         Auth::logout(); 
         return view ('start');
         });
     });
+
+
 /*
  *      CATALOGUE
 */
 
 Route::get('/catalogue', 'CatalogueController@show')->name('showCatalogue');
-Route::post('catalogue-filter', 'CatalogueController@filter')->name('filterCatalogue');
+Route::post('/catalogue-filter', 'CatalogueController@filter')->name('filterCatalogue');
 Route::get('/catalogue/help', function() { return view('catalogue.help'); } );
 
 /*
@@ -75,3 +83,9 @@ Route::get('/catalogue/help', function() { return view('catalogue.help'); } );
 */
 
 Route::get('/piece/show/{id}', 'PieceController@show')->name('showPiece');
+
+Route::get('/erratum/create/{piece_id}', 'ErratumController@create')->name('createErratum');
+
+Route::post('/erratum/store', 'ErratumController@store')->name('storeErratum');
+
+

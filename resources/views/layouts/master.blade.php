@@ -27,6 +27,7 @@
 </head>
 
 <body>
+{{--*/ $redactionMail = 'mail@nun-singet-und-seid-froh.info' /*--}}
 
     <div class="row header">
         @include('layouts.header')

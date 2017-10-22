@@ -14,5 +14,6 @@
     <span class="board-nav-subsection-title">Update</span></br>
     <ul class="board-nav-list">
         <li><a href="/board/epoques">Epochen</a></li>
+		<li><a href="/board/erratums">Errata</a></li>
     </ul>
 </div>
