@@ -70,7 +70,7 @@
     </div>
 
     <div class="col-lg-3 col-md-3 col-sm-6">
-        <div>Dichter*in</div>
+        <div>Librettist*in</div>
         <select id="lyricists">
             <option value=""></option>
             @foreach ( $data['lyricists'] as $lyricist) 

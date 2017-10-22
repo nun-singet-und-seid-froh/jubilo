@@ -18,12 +18,14 @@ class Source extends Model
     }
     
   // 1-to-n
-  
-    // ...
+    public function isSuperSourceOf() {
+        return $this->hasMany('App\Models\Source', 'SuperSource');
+    }
 
   // n-to-1
-
-    // ...
+    public function isSubSourceOf() {
+		return $this->belongsTo('App\Models\Source', 'SuperSource');
+    }
   
   // n-to-n    
     public function pieces() {
@@ -74,12 +76,26 @@ class Source extends Model
             if ( $this['url']) {
                 $sourceString ='<a href="' . $this['url'] . '" target="_blank" class="external">' . $sourceString . '</a>';
             }
+		return $sourceString;
         }
-       
+        
+	// show signature only when library is given 
+	if ( $this['library']) {
+            $sourceString .=' {{' . $this['library'];
+            if ( $this['signature'] ) {
+                $sourceString .=' -' . $this['signature'];
+	    }
+	    $sourceString .= ' }}';
+        }
+
+
         if ( $this['comment']) {
             $sourceString .=' [' . $this['comment'] . ']' ;
         }
-
+        
+	if ( $this->isSubSourceOf()->count() > 0 ) {
+	    $sourceString .= 'in: ' . $this->isSubSourceOf()->getHTMLString();
+	}
         return $sourceString;
     }
   

@@ -4,7 +4,12 @@
 
 <div class="title row">
     {{ $data['title'] }}
+
+    <div class="title-sub">
+    	<a href="/erratum/create/{{ $data['id'] }}" class="hint-link">Erratum melden</a>
+    </div>
 </div>
+
 
 <?php
 $information_items = [
@@ -26,6 +31,7 @@ $download_items = [
   'sourcecode' => ['caption' => 'Quellcode', 'var' => $data['sourcecode']['string'], 'link' => $data['sourcecode']['link']],
   ]
 ?>
+
 
 <div class="row">
     <div class="col-lg-6 col-md-6 macro-column"><!-- left column -->
@@ -98,7 +104,10 @@ $download_items = [
                         <div class="col-md-4 caption">Quelle(n)</div>
                         <div class="col-md-8">
                             @foreach ( $data['sources'] as $source )
-                            {!! $source->getHTMLString() !!}.
+                            {!! $source->getHTMLString() !!}. 
+							@if ( $source->isSubSourceOf()->first() )
+ 								In: {!! $source->isSubSourceOf()->first()->getHTMLString() !!}. 
+							@endif
                             @endforeach
                         </div>
                     </div>           

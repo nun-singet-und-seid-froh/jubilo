@@ -51,6 +51,9 @@ class PieceController extends Controller
         $view_data = [];
 
         // title
+        $view_data['id'] = $piece['id'];
+
+        // title
         $view_data['title'] = $piece['title'];
 
         // composer
@@ -666,4 +669,9 @@ class PieceController extends Controller
     public function publishSucces($editionNumber){
         return view('piece.published', ['piece_editionNumber'=>$editionNumber]);
     }
+
+/*********************************************
+*                SHOW                        *
+*********************************************/
+
 }

@@ -10,7 +10,8 @@ use App\Models\Source;
 class SourceController extends Controller {
 
     public function create() {
-        return view('source.create');
+		$data['sources'] = Source::all();        
+		return view('source.create', ['data'=> $data]);
     }
 
     public function store(Request $request) {
@@ -28,6 +29,14 @@ class SourceController extends Controller {
         $source['comment'] = $request['comment'];
         $source['license'] = $request['license'];
         $source['isPubliclyAvailable'] = $request['isPubliclyAvailable'];
+        $source['library'] = $request['library'];
+        $source['signature'] = $request['signature'];
+
+	if ( $request['superSource_id'] <> "") {
+	    $superSource = Source::findOrFail($request['superSource_id']);
+	    
+	    $source->isSubSourceOf()->associate($superSource);
+	}
 
         if ($request->hasFile('scan')) {
             $sourceFileName = $request['editors'] . ': '
