@@ -1,0 +1,21 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = tab
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+ij_smart_tabs = true
+ij_any_block_brace_style = end_of_line
+ij_any_class_brace_style = end_of_line
+ij_any_lambda_brace_style = end_of_line
+ij_any_method_brace_style = end_of_line
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{yml,yaml}]
+indent_size = 2
