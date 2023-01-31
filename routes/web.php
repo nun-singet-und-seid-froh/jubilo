@@ -23,7 +23,11 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
+
+Route::get('/catalogue', function () {
+	return Inertia::render('Catalogue', []);
+})->name('catalogue');
 
 Route::middleware([
     'auth:sanctum',

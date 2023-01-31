@@ -12,9 +12,23 @@ module.exports = {
 
     theme: {
         extend: {
-            fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-            },
+			fontFamily: {
+				serif: ['"EB Garamond 12"', ...defaultTheme.fontFamily.serif]
+			},
+	        colors: {
+				nsusf: {
+					50: '#807378',
+					100: '#806670',
+					200: '#805968',
+					300: '#804d60',
+					400: '#804058',
+					500: '#80334f',
+					600: '#802648',
+					700: '#801941',
+					800: '#800d39',
+					900: '#800032',
+				}
+	        }
         },
     },
 
