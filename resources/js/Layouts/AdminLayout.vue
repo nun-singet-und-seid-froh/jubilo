@@ -28,6 +28,7 @@ const logout = () => {
 </script>
 
 <template>
+<body>
     <div>
         <Head :title="title" />
 
@@ -284,4 +285,5 @@ const logout = () => {
             </main>
         </div>
     </div>
+</body>
 </template>

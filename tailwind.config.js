@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -16,21 +16,23 @@ module.exports = {
 				serif: ['"EB Garamond 12"', ...defaultTheme.fontFamily.serif]
 			},
 	        colors: {
-				nsusf: {
-					50: '#807378',
-					100: '#806670',
-					200: '#805968',
-					300: '#804d60',
-					400: '#804058',
-					500: '#80334f',
-					600: '#802648',
-					700: '#801941',
-					800: '#800d39',
-					900: '#800032',
-				}
+				background: '#0a0a2a',
+				prussian: {
+					50: '#262629',
+					100: '#242429',
+					200: '#1c1c29',
+					300: '#181829',
+					400: '#141429',
+					500: '#111129',
+					600: '#0d0d29',
+					700: '#0a0a2a',
+					800: '#060629',
+					900: '#020229',
+				},
+		        offwhite: '#f2eae8'
 	        }
         },
     },
 
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), require('tailwindcss-opentype')],
 };

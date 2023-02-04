@@ -16,25 +16,21 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Home', [
+	return Inertia::render('Home', [
 		'title' => __('home.title'),
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+		'canLogin' => Route::has('login'),
+		'canRegister' => Route::has('register'),
+		'laravelVersion' => Application::VERSION,
+		'phpVersion' => PHP_VERSION,
+	]);
 })->name('home');
 
 Route::get('/catalogue', function () {
 	return Inertia::render('Catalogue', []);
 })->name('catalogue');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/admin', function () {
-        return Inertia::render('Admin');
-    })->name('admin');
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
+	Route::get('/admin', function () {
+		return Inertia::render('Admin');
+	})->name('admin');
 });

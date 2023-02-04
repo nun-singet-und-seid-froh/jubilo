@@ -7,6 +7,7 @@ indent_size = 4
 indent_style = tab
 insert_final_newline = true
 trim_trailing_whitespace = true
+max_line_length = 120
 
 ij_smart_tabs = true
 ij_any_block_brace_style = end_of_line
