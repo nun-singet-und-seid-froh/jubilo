@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: "EB Garamond 12";
+		src: local("EB Garamond"), local("EB Garamond 12"), url("/fonts/EBGaramond/EBGaramond-Regular.woff2") format("woff2");
+		font-style: normal;
+		font-variant: common-ligatures discretionary-ligatures contextual diagonal-fractions;
+		font-weight: normal;
+	}
+
+	@font-face {
+		font-family: "EB Garamond 12";
+		src: local("EB Garamond"), local("EB Garamond 12"), url("/fonts/EBGaramond/EBGaramond-Italic.woff2") format("woff2");
+		font-style: italic;
+		font-variant: common-ligatures discretionary-ligatures contextual diagonal-fractions;
+		font-weight: normal;
+	}
+}
+
+#app {
+	@apply font-serif common-ligatures contextual discretionary-ligatures antialiased bg-offwhite min-h-screen text-prussian-700;
+}
