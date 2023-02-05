@@ -1,14 +1,23 @@
 {
-	"compilerOptions": {
-		"lib": ["dom", "es2015"],
-		"sourceMap": true,
-		"declaration": true,
-		"noImplicitAny": true,
-		"module": "commonjs",
-		"target": "es5",
-		"allowJs": true,
-		"moduleResolution": "node"
-	},
-	"include": ["src/**/*.ts*"],
-	"exclude": ["node_modules", "dist", "lib"]
+  "compilerOptions": {
+	  "lib": ["dom","ESNext"],
+	  "sourceMap": true,
+	  "declaration": true,
+	  "noImplicitAny": true,
+	  "module": "ESNext",
+	  "target": "ESNext",
+	  "allowJs": true,
+	  "moduleResolution": "node",
+	  "useDefineForClassFields": true,
+	  "strict": true,
+	  "jsx": "preserve",
+	  "resolveJsonModule": true,
+	  "isolatedModules": true,
+	  "esModuleInterop": true,
+	  "skipLibCheck": true,
+	  "noEmit": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": ["node_modules", "dist", "lib"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
