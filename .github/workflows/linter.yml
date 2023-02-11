@@ -10,7 +10,6 @@ on:
   push:
     branches:
       - "master"
-      - "migrate-to-jetstream"
   pull_request:
     branches:
       - "master"
