@@ -1,4 +1,4 @@
-import Piece from './Piece.vue'
+import Piece from "./Piece.vue";
 import {Meta, StoryFn} from "@storybook/vue3";
 
 export default {
@@ -6,7 +6,7 @@ export default {
 	 * See https://storybook.js.org/docs/vue/configure/overview#configure-story-loading
 	 * to learn how to generate automatic titles
 	 */
-	title: 'Piece',
+	title: "Piece",
 	component: Piece,
 } as Meta<typeof Piece>;
 
@@ -15,19 +15,19 @@ const Template: StoryFn<typeof Piece> = (args) => ({
 	setup() {
 		return { args };
 	},
-	template: '<Piece v-bind="args" />',
+	template: "<Piece v-bind=\"args\" />",
 });
 
 export const FullPiece = Template.bind({});
 FullPiece.args = {
 	piece: {
-		title: 'In Dulci Jubilo',
+		title: "In Dulci Jubilo",
 		composer: {
-			name: 'Hugo Distler'
+			name: "Hugo Distler"
 		},
 		download: {
-			pdfUrl: 'https://web.archive.org/web/20220528113311im_/https://nun-singet-und-seid-froh.info/storage/sheets/8 Also hat Gott die Welt geliebet (Distler, Hugo).pdf'
+			pdfUrl: "https://web.archive.org/web/20220528113311im_/https://nun-singet-und-seid-froh.info/storage/sheets/8 Also hat Gott die Welt geliebet (Distler, Hugo).pdf"
 		}
 	}
 
-}
+};

@@ -1,15 +1,15 @@
 export interface PersonData {
-	type: 'composer' | 'lyricist',
+	type: "composer" | "lyricist",
 	name?: string,
-	dateOfBirth?: string,
+	born?: string,
 	died?: string
 }
 
 
 export interface ComposerData extends PersonData {
-	type: 'composer'
+	type: "composer"
 }
 
 export interface LyricistData extends PersonData {
-	type: 'lyricist'
+	type: "lyricist"
 }
