@@ -6,11 +6,11 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps} from "vue";
+import {defineProps, ref} from "vue";
 import {PersonData} from "../../Data/PersonData";
 const props = defineProps<{
 	person?: PersonData
 }>();
 
-const title = props.person.type == "composer" ? "Komponist*in" : "Dichter*in";
+const title = ref((props.person.type === "composer") ? "Komponist*in" : "Dichter*in");
 </script>
