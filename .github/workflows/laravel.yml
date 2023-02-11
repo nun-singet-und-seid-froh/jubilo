@@ -2,9 +2,10 @@ name: Laravel
 
 on:
   push:
-    branches: [ "master" ]
+    - "master"
+    - "migrate-to-jetstream"
   pull_request:
-    branches: [ "master" ]
+    - "master"
 
 jobs:
   laravel-tests:
