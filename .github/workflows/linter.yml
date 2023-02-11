@@ -10,8 +10,10 @@ on:
   push:
     branches:
       - "master"
+      - "migrate-to-jetstream"
   pull_request:
-    - "master"
+    branches:
+      - "master"
 jobs:
   run-lint:
     runs-on: ubuntu-latest
