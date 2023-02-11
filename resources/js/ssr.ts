@@ -21,5 +21,11 @@ createServer((page) =>
                     location: new URL(page.props.ziggy.location),
                 });
         },
+	    progress: {
+		    delay: 250,
+		    color: '#101048',
+		    includeCSS: true,
+		    showSpinner: false
+	    },
     })
 );
