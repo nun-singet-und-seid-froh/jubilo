@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PieceController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,6 +25,8 @@ Route::get('/', function () {
 		'phpVersion' => PHP_VERSION,
 	]);
 })->name('home');
+
+Route::get('/piece/{pieceId}', [ PieceController::class, 'show'])->name('piece');
 
 Route::get('/catalogue', function () {
 	return Inertia::render('Catalogue', []);
