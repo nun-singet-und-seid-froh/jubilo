@@ -1,5 +1,5 @@
 <template>
-	<div class="flex w-full">
+	<div class="w-full h-full flex">
 		<iframe class="w-full grow-1" :src="srcUrl" :title="download.name"/>
 	</div>
 </template>

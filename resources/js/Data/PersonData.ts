@@ -3,6 +3,7 @@ export interface PersonData {
 	name?: string,
 	born?: string,
 	died?: string
+	imageUrl?: string
 }
 
 
