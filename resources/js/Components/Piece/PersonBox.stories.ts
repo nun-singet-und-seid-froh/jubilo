@@ -3,7 +3,7 @@ import {Meta, StoryFn} from "@storybook/vue3";
 import {PersonData} from "../../Data/PersonData";
 
 export default {
-	title: "PersonBox",
+	title: "Piece/Person Box",
 	component: PersonBox
 } as Meta<typeof PersonBox>;
 

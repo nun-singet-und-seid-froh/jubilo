@@ -1,13 +1,14 @@
 <template>
 	<Title :title="piece.title"/>
-	<div class="flex w-full">
+	<div class="flex w-full p-2 space-x-2">
 		<div class="grow-0 w-1/2">
-			<div class="flex m-2 mr-1 ">
+			<div class="flex space-x-2">
 				<PersonBox :person="composer"/>
 				<PersonBox :person="lyricist"/>
 			</div>
+			<DownloadBox :download="piece.download" />
 		</div>
-		<div class="flex shadow-md w-1/2 m-2 ml-1 p-2" style="height: 800px">
+		<div class="flex shadow-md w-1/2" style="height: 800px">
 			<PdfBox :download="piece.download"/>
 		</div>
 	</div>
@@ -17,6 +18,7 @@
 import {defineProps, Ref, ref, UnwrapRef} from "vue";
 import Title from "../Components/Piece/Title.vue";
 import PersonBox from "../Components/Piece/PersonBox.vue";
+import DownloadBox from "../Components/Piece/DownloadBox.vue";
 import PdfBox from "../Components/Piece/PdfBox.vue";
 import {ComposerData, LyricistData, PersonData} from "../Data/PersonData";
 import {DownloadData} from "../Data/DownloadData";

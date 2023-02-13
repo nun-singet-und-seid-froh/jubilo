@@ -3,7 +3,7 @@ import {Meta, StoryFn} from "@storybook/vue3";
 import {DownloadData} from "../../Data/DownloadData";
 
 export default {
-	title: "Pdf Box",
+	title: "Piece/Pdf Box",
 	component: PdfBox
 } as Meta<typeof PdfBox>;
 

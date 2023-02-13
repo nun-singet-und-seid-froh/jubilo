@@ -2,7 +2,7 @@ import Title from "./Title.vue";
 import {Meta, StoryFn} from "@storybook/vue3";
 
 export default {
-	title: "Piece Title",
+	title: "Piece/Title",
 	component: Title
 } as Meta<typeof Title>;
 
